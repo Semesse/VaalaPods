@@ -1,0 +1,24 @@
+*.semesse.me {
+  tls {$CERT_FILE} {$KEY_FILE}
+
+  @vault host vault.semesse.me
+  handle @vault {
+    reverse_proxy vault:80
+  }
+
+  @pve host pve.semesse.me
+  handle @pve {
+    reverse_proxy {$PVE}
+  }
+
+  @nextcloud host nextcloud.semesse.me
+  handle @nextcloud {
+    reverse_proxy nextcloud:80
+  }
+
+  # Fallback for otherwise unhandled domains
+  handle {
+    # error * "Not found" 404
+    abort
+  }
+}

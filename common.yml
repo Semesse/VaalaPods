@@ -1,0 +1,30 @@
+version: '3.5'
+
+services:
+  caddy:
+    image: caddy
+    restart: always
+    networks:
+      - semnet
+    ports:
+      - 8080:80
+      - 8443:443
+    environment:
+      - TZ=Asia/Shanghai
+      - CERT_FILE=/cert/semesse.crt
+      - KEY_FILE=/cert/semesse.key
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - type: bind
+        source: ~/code/workspace/cert
+        target: /cert
+        read_only: true
+
+networks:
+  semnet:
+    name: semnet
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.0.0/16
+
