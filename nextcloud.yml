@@ -1,0 +1,39 @@
+version: '3.1'
+
+volumes:
+  nextcloud:
+  nextcloud_db:
+
+services:
+  nextcloud:
+    image: nextcloud
+    restart: always
+    volumes:
+      - nextcloud:/var/www/html
+    networks:
+      - semnet
+    environment:
+      - MYSQL_HOST=nextcloud_db
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+    env_file:
+      - nextcloud.env
+  
+  nextcloud_db:
+    image: mariadb
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    volumes:
+      - nextcloud_db:/var/lib/mysql
+    networks:
+      - semnet
+    environment:
+      - MARIADB_DATABASE=nextcloud
+      - MARIADB_USER=nextcloud
+    env_file:
+      - nextcloud.env
+
+networks:
+  semnet:
+    external:
+      name: semnet
