@@ -1,4 +1,4 @@
-*.semesse.me {
+https://*.semesse.me {
   tls {$CERT_FILE} {$KEY_FILE}
 
   @vault host vault.semesse.me
@@ -13,6 +13,8 @@
 
   @nextcloud host nextcloud.semesse.me
   handle @nextcloud {
+    rewrite /.well-known/carddav /remote.php/dav
+    rewrite /.well-known/caldav /remote.php/dav
     reverse_proxy nextcloud:80
   }
 
@@ -21,4 +23,8 @@
     # error * "Not found" 404
     abort
   }
+}
+
+http://*.semesse.me {
+  redir https://{host}{uri}
 }

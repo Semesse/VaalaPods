@@ -16,6 +16,7 @@ services:
       - MYSQL_HOST=nextcloud_db
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
+      - OVERWRITEPROTOCOL=https
     env_file:
       - nextcloud.env
   
