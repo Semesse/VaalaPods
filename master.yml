@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  caddy:
+    extends:
+      file: common.yml
+      service: caddy
+  nextcloud:
+    extends:
+      file: nextcloud.yml
+      service: nextcloud
+  nextcloud_db:
+    extends:
+      file: nextcloud.yml
+      service: nextcloud_db
+  vaultwarden:
+    extends:
+      file: vaultwarden.yml
+      service: vaultwarden
+
+volumes:
+  nextcloud:
+  nextcloud_db:

@@ -1,8 +1,4 @@
-version: '3.1'
-
-volumes:
-  nextcloud:
-  nextcloud_db:
+version: '3.5'
 
 services:
   nextcloud:
