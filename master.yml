@@ -17,7 +17,19 @@ services:
     extends:
       file: vaultwarden.yml
       service: vaultwarden
+  zerotier:
+    extends:
+      file: zerotier.yml
+      service: zerotier
 
 volumes:
   nextcloud:
   nextcloud_db:
+
+networks:
+  semnet:
+    name: semnet
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.0.0/16

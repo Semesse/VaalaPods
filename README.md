@@ -16,4 +16,6 @@ running all my self-hosted services inside docker containers
 - reverse proxy
   - ssl certificate rotate
   - client certificate authentication
+- misc
+  - auto update
 
